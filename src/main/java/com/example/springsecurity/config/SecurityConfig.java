@@ -34,6 +34,11 @@ public class SecurityConfig {
         return http.build();
     }
 
+    @Bean
+    static PasswordEncoder psEncode(){
+        return new BCryptPasswordEncoder();
+    }
+
 //    @Bean
 //    UserDetailsService user(){
 //        UserDetails user = User.builder()

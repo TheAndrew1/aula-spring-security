@@ -18,18 +18,15 @@ import java.util.List;
 public class UsuarioService implements UserDetailsService {
     @Autowired
     UsuarioRepository usuarioRepository;
-
-    @Bean
-    static PasswordEncoder psEncode(){
-        return new BCryptPasswordEncoder();
-    }
+    @Autowired
+    PasswordEncoder psEncode;
 
     public List<Usuario> findAll(){
         return usuarioRepository.findAll();
     }
     @Transactional(rollbackFor = Exception.class)
     public Usuario create(Usuario usuario){
-        usuario.setPassword(psEncode().encode(usuario.getPassword()));
+        usuario.setPassword(psEncode.encode(usuario.getPassword()));
 
         return usuarioRepository.save(usuario);
     }
